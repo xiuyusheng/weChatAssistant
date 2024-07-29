@@ -1,0 +1,10 @@
+github.com/eatmoreapple/openwechat v1.4.7 h1:JyMr7I6ZdjWrVWKNs3onGz68YhkAnvTXTBMkS74O0nc=
+github.com/eatmoreapple/openwechat v1.4.7/go.mod h1:h4m2N8m0XsUKlm7UR8BUGkV89GNuKHCnlGV3J8n9Mpw=
+github.com/go-flac/flacpicture v0.3.0 h1:LkmTxzFLIynwfhHiZsX0s8xcr3/u33MzvV89u+zOT8I=
+github.com/go-flac/flacpicture v0.3.0/go.mod h1:DPbrzVYQ3fJcvSgLFp9HXIrEQEdfdk/+m0nQCzwodZI=
+github.com/go-flac/flacvorbis v0.2.0 h1:KH0xjpkNTXFER4cszH4zeJxYcrHbUobz/RticWGOESs=
+github.com/go-flac/flacvorbis v0.2.0/go.mod h1:uIysHOtuU7OLGoCRG92bvnkg7QEqHx19qKRV6K1pBrI=
+github.com/go-flac/go-flac v1.0.0 h1:6qI9XOVLcO50xpzm3nXvO31BgDgHhnr/p/rER/K/doY=
+github.com/go-flac/go-flac v1.0.0/go.mod h1:WnZhcpmq4u1UdZMNn9LYSoASpWOCMOoxXxcWEHSzkW8=
+github.com/satori/go.uuid v1.2.0 h1:0uYX9dsZ2yD7q2RtLRtPSdGDWzjeM3TbMJP9utgA0ww=
+github.com/satori/go.uuid v1.2.0/go.mod h1:dA0hQrYB0VpLJoorglMZABFdXlWrHn1NEOzdhQKdks0=
