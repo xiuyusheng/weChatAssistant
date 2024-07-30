@@ -176,7 +176,7 @@ func (r *Record) Ask(text string) (string, error) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Host", "api.chatanywhere.tech")
-	req.Header.Set("Authorization", "Bearer sk-AHyVVBgvN6CXtIzobePPCuUc2yeTYoItnaVxZjMasrSckLiQ")
+	req.Header.Set("Authorization", "")
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
