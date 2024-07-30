@@ -9,7 +9,7 @@
 ## 功能
 
 - 聊天：基于[openwechat](https://github.com/eatmoreapple/openwechat)项目实现，支持聊天、发送文件、图片等功能，作者还内置了微信所有的表情和丰富的消息类型处理函数，具体可查看[在线文档](https://openwechat.readthedocs.io/zh/latest/)。
-- AI：接入[ChatAnyWhere](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file),需要自行获取并配置 key，每日可以调用 200 此`gpt-4o-mini`。([配置 key](./api/gpt/chatbot.go#L179))
+- AI：接入[ChatAnyWhere](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file),需要自行获取并配置 key，每日可以调用 200 次`gpt-4o-mini`。([配置 key](./api/gpt/chatbot.go#L179))
 - 天气：接入[腾讯天气](https://github.com/bestyize/MiniWeather),具体参数自行查看这个[API 文档](https://github.com/bestyize/MiniWeather/blob/master/%E8%85%BE%E8%AE%AF%E5%A4%A9%E6%B0%94API.md)，效果如下![微信机器人天气](./image/1.png)
 - 音乐：接入[酷我音乐 API](./api/musicapi.go)，搜索 api 已经写好了，有兴趣的可以自己改改。效果如下![微信机器人音乐](./image/2.png)
 
