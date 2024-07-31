@@ -30,7 +30,7 @@ func init() {
 					musicShare(msg, v[0])
 				}
 			}},
-		"当system记录中没有该城市数据时，当要询问某地（市）天气时，想要去到某地时天气决策;当询问某几个地方的天气对比时,返回多个命令串。一定不要询问查哪一天的广州天气": &cmdFn{
+		"当属性中没有该城市天气，需要获取某城市天气时，当需要多比某几个天气时（返回多个命令串）": &cmdFn{
 			keyD: gpt.Pattre{Keys: []string{"城市"}, D: ".*?"},
 			Task: func(msg *openwechat.Message, val ...[]string) {
 				msg.ReplyText("正在查询天气,请稍等...")
