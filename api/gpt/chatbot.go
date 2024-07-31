@@ -71,9 +71,14 @@ type message struct {
 	Content string   `json:"content"`
 }
 
+type attrT struct {
+	Data interface{}
+	Time time.Time
+}
+
 type Record struct {
 	Msg     []message
-	BotAttr map[string]interface{}
+	BotAttr map[string]attrT
 }
 
 type Pattre struct {
@@ -108,7 +113,7 @@ func (b *chatBots) createBot(name string) (bool, *Record) {
 	if _, ok := (*b).Bots[name]; ok {
 		return false, nil
 	}
-	(*b).Bots[name] = &Record{Msg: []message{sysGuide.Msg, {Role: system}}, BotAttr: make(map[string]interface{})}
+	(*b).Bots[name] = &Record{Msg: []message{sysGuide.Msg, {Role: system}}, BotAttr: make(map[string]attrT)}
 	return true, (*b).Bots[name]
 }
 
@@ -150,7 +155,23 @@ func (r *Record) CreateAssistantRecord(text string) *Record {
 	return r
 }
 
+func (r *Record) BotInfoRefresh() {
+	temMapKey := []string{}
+	temResult := map[string]interface{}{}
+	for k, v := range (*r).BotAttr {
+		if time.Since(v.Time) > 5*time.Minute {
+			temMapKey = append(temMapKey, k)
+			temResult[k] = v.Data
+		}
+	}
+	for _, v := range temMapKey {
+		delete((*r).BotAttr, v)
+	}
+	r.Msg[1].Content = fmt.Sprintf("属性：%+v", r.BotAttr)
+}
+
 func (r *Record) get01SystemGuide() string {
+	r.BotInfoRefresh()
 	return fmt.Sprintf("%sThe current date and time is %s.%s", initSysGuide, time.Now().Format("2006-01-02 15:04:05"), sysGuide.SD)
 }
 
@@ -176,7 +197,7 @@ func (r *Record) Ask(text string) (string, error) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Host", "api.chatanywhere.tech")
-	req.Header.Set("Authorization", "")
+	req.Header.Set("Authorization", "Bearer sk-AHyVVBgvN6CXtIzobePPCuUc2yeTYoItnaVxZjMasrSckLiQ")
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -258,7 +279,7 @@ func (b *chatBots) SetBotAttr(botName, attrName string, attr interface{}) {
 	if _, ok := (*b).Bots[botName]; !ok {
 		return
 	}
-	(*b).Bots[botName].BotAttr[attrName] = attr
+	(*b).Bots[botName].BotAttr[attrName] = attrT{Data: attr, Time: time.Now()}
 	b.BotsInfoRefresh()
 }
 
@@ -282,7 +303,7 @@ func (b *chatBots) BotsInfoRefresh() error {
 	sysGuide.SD = fmt.Sprintf("\n 根据这个字典中键的描述来选择是否返回后面的值，如果确定是属于这种情况需要检查命令串中的参数是否齐全，如不齐全则需要询问提问的用户，如果确定属于这种情况的话则不需要返回多余的信息，只需要专注补齐参数即可，不要问多余的问题，将值补充完整即可，将命令串中的${key}替换为{以确定的值}，再返回整个命令串\n例如：\n'@26bb2276-55f7-4ae6-86a5-ded21a8e4d69:-${歌名}+@'这个值中缺少歌名，用户要搜索的歌名为'逆战'，从对话中获取歌名后返回的命令串为'@26bb2276-55f7-4ae6-86a5-ded21a8e4d69:-{逆战}+@'即可\n这个情况字典如下：%s.If the command is confirmed, do not return any extra information, or do not return the command at all.", string(SD))
 
 	for _, v := range (*b).Bots {
-		v.Msg[1].Content = fmt.Sprintf("属性：%+v", v.BotAttr)
+		v.BotInfoRefresh()
 	}
 	return nil
 }
